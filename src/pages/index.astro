@@ -1,15 +1,182 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import Button from '../components/Button.astro';
-import Link from '../components/Link.astro';
 import { Image } from 'astro:assets';
-import thumbsup from "../assets/images/thumbsup.png";
+import VideoSrc from '/src/assets/video/video.mp4';
+import altaner from "/src/assets/images/altaner_logo.png"
+import font from "/src/assets/images/font.png"
+import herounit from "/src/assets/images/herounit_2.png"
+import kaktus_altan from "/src/assets/images/kaktus_altan.png"
+import flyvende from "/src/assets/images/kaktus_flyvende.png"
+import grøn from "/src/assets/images/kaktus_grøn.png"
+import hvid from "/src/assets/images/kaktus_hvid.png"
+import spids from "/src/assets/images/kaktus_spids.png"
+import logo from "/src/assets/images/logo.png"
+import rundt_logo from "/src/assets/images/rundt_logo.png"
+import side_kaktus from "/src/assets/images/side_kaktus.png"
 ---
-<MainLayout title="Titel">
+<MainLayout title="Typografi Kaktus">
+	<head>
+	  <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
+	</head>
+	<style>
+	  /* Hero Parallax Effekt */
+	  .hero {
+		background: url('/src/assets/images/herounit_2.png') center center / cover no-repeat fixed;
+		height: 100vh;
+		position: relative;
+	  }
+	  .hero-text {
+		animation: fadeIn 1.5s ease-in-out;
+	  }
+  
+	  /* Fade In Animation */
+	  @keyframes fadeIn {
+		0% { opacity: 0; }
+		100% { opacity: 1; }
+	  }
+  
+	  /* Bounce Animation til Scroll Pil */
+	  .scroll-down {
+		animation: bounce 2s infinite;
+	  }
+	  @keyframes bounce {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-10px); }
+	  }
+  
+	  /* Smooth Scroll */
+	  html {
+		scroll-behavior: smooth;
+	  }
+  
+	  /* Fade-in klasse til sektioner */
+	  .fade-in {
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+	  }
+	  .fade-in.visible {
+		opacity: 1;
+		transform: translateY(0);
+	  }
+	</style>
+  
+	<script>
+	  // Intersection Observer for fade-in animation
+	  document.addEventListener("DOMContentLoaded", () => {
+		const fadeInElements = document.querySelectorAll('.fade-in');
+		const observer = new IntersectionObserver(entries => {
+		  entries.forEach(entry => {
+			if (entry.isIntersecting) {
+			  entry.target.classList.add('visible');
+			}
+		  });
+		});
+		fadeInElements.forEach(element => observer.observe(element));
+	  });
+	</script>
+  
 	<article>
-		<h1>Index overskrift</h1>
-		<Button>Klik!</Button>
-		<p>Link til <Link href="https://www.kea.dk" target="_blank">En anden side</Link></p>
-		<Image src={thumbsup} alt=""></Image>
+	  <!-- HERO UNIT med Parallax Effekt -->
+	  <div class="hero">
+		<div class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-40 text-white text-center p-4 hero-text">
+			<Image src={hvid} alt="Kaktus logo" class="mb-6" /></div>
+		
+		<!-- Scroll ned pil med bounce -->
+		<div class="absolute bottom-8 w-full flex justify-center">
+		  <div class="scroll-down">
+			<svg class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+			</svg>
+		  </div>
+		</div>
+	  </div>
+  
+	  <!-- SEKTION 1 med fade-in effekt -->
+	  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 p-16 items-center fade-in">
+		<div class="text-left font-sans text-[#152E1E]">
+			<h2 class="text-2xl font-bold mb-6 uppercase tracking-wider leading-tight">En Kraftfuld Font med Et Strejf af Elegance: Inspireret af Kaktus Towers</h2>
+			<p class="text-lg leading-relaxed tracking-wide max-w-3xl mb-8">
+				Jeg præsenterer her min egen font, som er designet til at være både kraftfuld og iøjnefaldende. Med inspiration fra Kaktus Towers i København har jeg skabt en typografi med en robust, solid struktur, der samtidig rummer de spidse vinkler og elegante detaljer fra bygningernes ikoniske altaner. Mit mål har været at indfange fornemmelsen af de to store, tunge tårne, som fylder i bybilledet, men samtidig fremstår lette og dynamiske med deres altaner dekoreret med gitterværk. På den måde kombinerer fonten det tunge og bombastiske med et strejf af elegance og bevægelse, så den føles levende fra alle vinkler.
+			</p>
+		</div>
+		<div class="w-full mx-4">
+			<video controls class="w-full h-full object-cover transition duration-300 hover:opacity-90 p-2">
+				<source src="/video/intro_kaktus.mp4" type="video/mp4" />
+				Din browser understøtter ikke videoafspilning.
+			  </video>
+		</div>
+	</div>
+  
+	  <!-- SEKTION 2 - Billedgalleri med hover-effekt -->
+	  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 fade-in">
+		<Image src={font} alt="Kaktus font" class="w-full h-full object-cover transition duration-300 hover:opacity-90 p-2" />
+		<video controls class="w-full h-full object-cover transition duration-300 hover:opacity-90 p-2">
+			<source src="/video/produktbilleder.mp4" type="video/mp4" />
+			Din browser understøtter ikke videoafspilning.
+		  </video>
+		<Image src={logo} alt="Kaktus logo" class="w-full h-full object-cover transition duration-300 hover:opacity-90 p-2" />
+	  </div>
+  
+	  <!-- SEKTION 3 med fade-in effekt -->
+	  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-16 fade-in">
+		<Image src={side_kaktus} alt="sort/hvid billede af Kaktus Towers" class="w-full h-[720px] object-cover"/>
+		<div class="flex flex-col justify-center text-left space-y-8 p-8 text-[#152E1E]">
+			<h2 class="text-2xl font-bold uppercase tracking-wider leading-tight mb-4">En Typografi Inspireret af Kaktus Towers: Funktionalitet og Æstetik i Skarp Forening</h2>
+			<p class="text-lg leading-relaxed tracking-wide max-w-md mb-8">
+				Min typografi har taget inspiration i de københavnske bygninger, Kaktus Towers, som blev bygget i 2018 med henblik på at fungere som studieboliger. Bygningerne er kendt for deres spidse altaner i forskudte vinkler, som giver en unik, dynamisk form, der både fanger lyset og skaber interessante skyggeeffekter. Denne arkitektoniske finesse har inspireret typografiens kantede former og skarpe linjer, der symboliserer en kombination af funktionalitet og æstetik – ligesom Kaktus Towers selv, der står som et ikon på moderne, dansk design og urban udvikling.
+			</p>
+			<Image src={rundt_logo}  alt="logo inden i cirkel" class="w-32 h-32 rounded-full object-cover"/>
+		</div>
+	</div>
+  
+	  <!-- SEKTION 5 - Billedgalleri med hover-effekt -->
+	  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 fade-in">
+		<Image src={flyvende} alt="Billede 1" class="w-full h-full object-cover transition duration-300 hover:opacity-90 p-2"/>
+		<Image src={spids} alt="Billede 2" class="w-full h-full object-cover transition duration-300 hover:opacity-90 p-2"/>
+		<Image src={grøn} alt="Billede 3" class="w-full h-full object-cover transition duration-300 hover:opacity-90 p-2"/>
+	  </div>
+  
+	  <!-- SEKTION 6 med fade-in effekt -->
+	  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-16 fade-in">
+		<div class="text-left text-[#152E1E] space-y-8">
+		  <h2 class="text-2xl font-bold uppercase tracking-wider leading-tight mb-4">Et Ikonisk 'K': Kaktus Towers’ Robuste Formsprog med Let Elegance</h2>
+		  <p class="text-lg leading-relaxed tracking-wide max-w-xl mb-8">
+			Jeg har også designet et ikon til min font, som samler essensen af Kaktus Towers' robuste og kantede formsprog. Ikonet består af et spejlvendt "K" for "Kaktus," lagt ovenpå et andet "K" i en sammenfletning, der skaber dynamik. De tynde, dybe streger imellem symboliserer altanernes lethed og kontrasterer elegant med det massive "K," så ikonet balancerer det tunge med et mere luftigt udtryk.
+		  </p>
+		  <!-- Lille billede under teksten -->
+		  <div class="w-[420px] h-[420px] mb-2">
+			<Image src={altaner} alt="Lille billede" class="w-full h-full object-cover"/>
+		  </div>
+		</div>
+		<Image src={kaktus_altan} alt="Beskrivelse af billede" class="w-full h-[750px] object-cover"/>
+	  </div>
+	  <!-- FOOTER -->
+	  <footer class="bg-[#152E1E] bg-opacity-90 p-10 text-white">
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+		  <div>
+			<h3 class="text-lg font-semibold mb-4">Om Kaktus Towers</h3>
+			<ul class="space-y-2">
+			  <li class="hover:text-white transition-colors">Design og Inspiration</li>
+			  <li class="hover:text-white transition-colors">Funktionalitet og Æstetik</li>
+			  <li class="hover:text-white transition-colors">Urban Udvikling i København</li>
+			</ul>
+		  </div>
+		  <div>
+			<h3 class="text-lg font-semibold mb-4">Typografi og Design</h3>
+			<ul class="space-y-2">
+			  <li class="hover:text-white transition-colors">Font Inspiration</li>
+			  <li class="hover:text-white transition-colors">Kaktus Towers' Formsprog</li>
+			  <li class="hover:text-white transition-colors">Ikonisk Design og Æstetik</li>
+			</ul>
+		  </div>
+		  <div class="flex items-center justify-center md:justify-start">
+			<Image src={hvid} alt="Footer Logo" class="h-80 -mt-28 w-auto opacity-80 hover:opacity-100 transition-opacity"/>
+		  </div>
+		</div>
+		<div class="mt-8 text-center text-sm border-t  pt-4">
+		  © 2024 Typografi Kaktus. Alle rettigheder forbeholdes.
+		</div>
+	  </footer>
 	</article>
-</MainLayout>
+  </MainLayout>
